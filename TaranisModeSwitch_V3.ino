@@ -150,12 +150,22 @@ void loop() {
   else if ((sw3 >= 100) && (sw3 < 900)) ppm[2]=1500;  // OSD-2
   else if  (sw3 >= 900)                 ppm[2]=2000;  // OSD-3
 
-       if (sw4 > 900) ppm[3]=1815;   // MODE-1 --> MANUAL
+ 
+// PPM3 for ArduPlane
+ if (sw4 > 900) ppm[3]=1815;   // MODE-1 --> MANUAL
   else if (sw4 < 100) ppm[3]=1685;   // MODE-2 --> LOITER
   else if (sw5 > 900) ppm[3]=1555;   // MODE-3 --> FBWA
   else if (sw5 < 100) ppm[3]=1425;   // MODE-4 --> AUTO
   else if (sw6 > 900) ppm[3]=1295;   // MODE-5 --> STAB
   else if (sw6 < 100) ppm[3]=1165;   // MODE-6 --> RTH
+
+//PPM4 for PX4
+ if       (sw4 > 900) ppm[4]=1100;   // MODE-1 --> Manual
+  else if (sw4 < 100) ppm[4]=1300;   // MODE-2 --> Assist
+  else if (sw5 > 900) ppm[4]=1400;   // MODE-3 --> PosCtl
+  else if (sw5 < 100) ppm[4]=1600;   // MODE-4 --> Auto
+  else if (sw6 > 900) ppm[4]=1700;   // MODE-5 --> Loiter
+  else if (sw6 < 100) ppm[4]=1900;   // MODE-6 --> Return
 
   
 //PPM-Wertebereiche abfragen und setled(nr) aufrufen
