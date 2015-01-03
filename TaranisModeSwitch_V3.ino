@@ -66,6 +66,7 @@ void setup(){
   ppm[i]= servo_default;
   }
   ppm[3]=2000;
+  ppm[4]=1100;
 
 // Ausgangspin für PPM vorbereiten und Pullup Widerstand setzen
   pinMode(PPM_outPin, OUTPUT);
@@ -161,10 +162,10 @@ void loop() {
 
 //PPM4 for PX4
  if       (sw4 > 900) ppm[4]=1100;   // MODE-1 --> Manual
-  else if (sw4 < 100) ppm[4]=1300;   // MODE-2 --> Assist
+  else if (sw4 < 100) ppm[4]=1700;   // MODE-2 --> Loiter
   else if (sw5 > 900) ppm[4]=1400;   // MODE-3 --> PosCtl
   else if (sw5 < 100) ppm[4]=1600;   // MODE-4 --> Auto
-  else if (sw6 > 900) ppm[4]=1700;   // MODE-5 --> Loiter
+  else if (sw6 > 900) ppm[4]=1300;   // MODE-5 --> Assist
   else if (sw6 < 100) ppm[4]=1900;   // MODE-6 --> Return
 
   

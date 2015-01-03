@@ -58,13 +58,16 @@ void setup(){
   delay(100); 
    
 // Kanal 1 mit 1150 vorbelegen
-ppm[0]=1150;                     
+  ppm[0]=1150;                     
     
 // Kanal 2 bis Kanal 8 mit 1500us vorbelegen
   for(int i=1; i<numchan; i++){    
   ppm[i]= servo_default;
   }
 
+// Kanal 3 mit 1100 vorbelegen
+  ppm[2]=1100;  
+  
 // Ausgangspin für PPM vorbereiten und Pullup Widerstand setzen
   pinMode(PPM_outPin, OUTPUT);
   digitalWrite(PPM_outPin, !PPM_Polarity);
@@ -123,7 +126,7 @@ void loop() {
 //  int sw5 = analogRead(A5);  // --- & AUTO
 //  int sw6 = analogRead(A6);  // --- & RTH
 
-//Analogwerte PPM(0) zuweisen
+//Analogwerte PPM(0) zuweisen --> Arduplane
        if (sw2 > 900) ppm[0]=1815;   // MANUAL
   else if (sw2 < 100) ppm[0]=1815;   // MANUAL
   else if (sw3 > 900) ppm[0]=1685;   // FBWA
@@ -134,6 +137,21 @@ void loop() {
   else if (sw5 < 100) ppm[0]=1295;   // AUTO
 //  else if (sw6 > 900) ppm[0]=1850;   // ---
   else if (sw6 < 100) ppm[0]=1165;   // RTH
+
+       if (sw1 > 900) ppm[1]=1000;   // ---
+  else if (sw1 < 100) ppm[1]=2000;   // EMERGENCY
+  
+//Analogwerte PPM(0) zuweisen --> PX4
+       if (sw2 > 900) ppm[2]=1100;   // MANUAL
+  else if (sw2 < 100) ppm[2]=1100;   // MANUAL
+  else if (sw3 > 900) ppm[2]=1400;   // PosCtl (ex FBWA)
+  else if (sw3 < 100) ppm[2]=1300;   // Assist / AltCtl (ex CRUISE)
+//  else if (sw4 > 900) ppm[2]=1450;   // ACRO
+  else if (sw4 < 100) ppm[2]=1700;   // LOITER
+//  else if (sw5 > 900) ppm[2]=1650;   // ---
+  else if (sw5 < 100) ppm[2]=1600;   // AUTO
+//  else if (sw6 > 900) ppm[2]=1850;   // ---
+  else if (sw6 < 100) ppm[2]=1900;   // RTH
 
        if (sw1 > 900) ppm[1]=1000;   // ---
   else if (sw1 < 100) ppm[1]=2000;   // EMERGENCY
